@@ -11,7 +11,7 @@ export function useGetBlogPosts() {
   return useQuery({
     queryKey: QUERY_KEYS.blogPosts,
     queryFn: () => apiClient.getAllBlogPosts(),
-    enabled: typeof window !== 'undefined', // Only run on client-side
+    // enabled: typeof window !== 'undefined', // Only run on client-side
   });
 }
 

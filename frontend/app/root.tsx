@@ -12,7 +12,13 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { Route } from "./+types/root";
 import "./app.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000, // 1 minute
+    },
+  },
+});
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
