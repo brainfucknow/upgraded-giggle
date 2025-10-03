@@ -2,7 +2,6 @@
 applyTo: "backend/**/*.cs,backend/**/*.csproj"
 ---
 
-This project is a web application that allows users to manage their blog.
 ## Folder Structure
 
 - `/backend`: .NET 8 Web API with Clean Architecture
