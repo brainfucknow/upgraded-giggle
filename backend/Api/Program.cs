@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Api.Infrastructure.Data;
 using Api.Application.Common.Interfaces;
 using Api.Infrastructure.Repositories;
+using Api.Infrastructure.Services;
 using Api.Application.BlogPosts.Queries;
 using Api.Application.BlogPosts.Commands;
 
@@ -29,6 +30,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Register repositories
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+
+// Register HTTP client
+builder.Services.AddHttpClient();
+
+// Register services
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Register use cases
 builder.Services.AddScoped<GetAllBlogPostsQuery>();

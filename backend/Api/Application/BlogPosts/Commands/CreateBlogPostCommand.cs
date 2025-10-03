@@ -7,10 +7,12 @@ namespace Api.Application.BlogPosts.Commands;
 public class CreateBlogPostCommand
 {
     private readonly IBlogPostRepository _repository;
+    private readonly IEmailService _emailService;
 
-    public CreateBlogPostCommand(IBlogPostRepository repository)
+    public CreateBlogPostCommand(IBlogPostRepository repository, IEmailService emailService)
     {
         _repository = repository;
+        _emailService = emailService;
     }
 
     public async Task<BlogPostDto> ExecuteAsync(CreateBlogPostDto createDto)
@@ -22,6 +24,9 @@ public class CreateBlogPostCommand
         };
 
         var createdBlogPost = await _repository.CreateAsync(blogPost);
+
+        // Send email notification asynchronously (fire and forget)
+        _ = Task.Run(async () => await _emailService.SendNewBlogPostNotificationAsync(createdBlogPost));
 
         return new BlogPostDto
         {
